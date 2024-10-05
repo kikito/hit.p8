@@ -11,7 +11,7 @@ Even when the two rectangles intersect, it can be tedious/tricky to find exactly
 
 I present you hit. It's a single function which will solve this particular problem, doing *continuous collision detection* instead of simple intersection.
 
-[#hit-0#]
+<iframe src="https://www.lexaloffle.com/bbs/widget.php?pid=hit" allowfullscreen width="621" height="513" style="border:none; overflow:hidden"></iframe>
 
 # Parameters and return values
 
