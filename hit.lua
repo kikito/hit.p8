@@ -55,18 +55,17 @@ function hit(x1,y1,w1,h1, x2,y2,w2,h2, goalx, goaly)
     end
   end
 
-  -- aabb1 goes though aabb2, in the direction (forwards or backwards)
-  -- select the smallest displacement
-  if abs(t1)<=abs(t2) then
+  if intersect then
+    -- aabb1 goes though aabb2, in the direction (forwards or backwards)
+    -- select the smallest displacement
+    if abs(t1)<=abs(t2) then
+      t,nx,ny=t1,nx1,ny1
+    else
+      t,nx,ny=t2,nx2,ny2
+    end
+  elseif 0<=t1 and t1<=1 then
     t,nx,ny=t1,nx1,ny1
   else
-    t,nx,ny=t2,nx2,ny2
-  end
-
-  if not intersect and abs(t)>1 then
-    -- the aabbs would intersect if the displacement was longer in the same direction
-    -- we allow the displacement to be longer when the aabbs intersect
-    -- (the displacement needed to exit aabb2 can be much bigger than the intended displacement)
     return nil
   end
 
