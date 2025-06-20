@@ -16,7 +16,7 @@ I present you hit. It's a single function which will solve this particular probl
 # Parameters and return values
 
 ```
-tx,ty,nx,ny,t,intersect = hit(x1,y1,w1,h1,x2,y2,w2,h2,goalx,goaly)
+t,nx,ny,tx,ty,intersect = hit(x1,y1,w1,h1,x2,y2,w2,h2,goalx,goaly)
 ```
 
 Hit takes 10 parameters:
@@ -25,9 +25,9 @@ Hit takes 10 parameters:
 - `goalx,goaly`: A point in space where the first rectangle "wants to move" (x1,y1 "wants to become" goalx,goaly)
 
 Hit returns nil if the first rectangle can move freely to goalx,goaly without touching the second rectangle. If the rectangles touch at any point during this journey, hit will return:
-- `tx,ty`: the coordinates where the first rectangle's top-left corner would be when it starts touching the second rectangle
-- `nx,ny`: the "normals" of the contact. Given that we are dealing with aabbs, both nx and ny can only have -1,0 or 1
 - `t`: "how far along" the journey did the contact occur. 0 means that the two boxes touch right at the beginning of the journey, and 1 means they touch at the end. In some degenerate cases t can also be bigger than 1 or smaller than 0 (see below). This parameter is useful for sorting collisions (the one with the smaller t will usually have "happened" first)
+- `nx,ny`: the "normals" of the contact. Given that we are dealing with aabbs, both nx and ny can only have -1,0 or 1
+- `tx,ty`: the coordinates where the first rectangle's top-left corner would be when it starts touching the second rectangle
 - `intersect`: `true` if the boxes were intersecting at the beginning of the journey, `false` if they were not. This parameter is useful to treat intersections differently from non-intersections in the collision resolution
 
 # Usage
