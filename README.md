@@ -11,7 +11,7 @@ Even when the two rectangles intersect, it can be tedious/tricky to find exactly
 
 I present you hit. It's a single function which will solve this particular problem, doing *continuous collision detection* instead of simple intersection.
 
-[![Hit](https://github.com/kikito/hit.p8/blob/365c01dafec9b666641ccc62b134c55ff4a6a464/hit.p8.png)](https://www.lexaloffle.com/bbs/widget.php?pid=hit)
+[![Hit](https://github.com/kikito/hit.p8/blob/365c01dafec9b666641ccc62b134c55ff4a6a464/hit.p8.png)](https://www.lexaloffle.com/bbs/cart_info.php?cid=hit-2)
 
 # Parameters and return values
 

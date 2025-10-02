@@ -23,8 +23,8 @@ function _draw()
   cls()
 
   line(x1,y1,goalx,goaly,12)
-  rect(x1,y1,x1+w1,y1+h1, mode==1 and 7 or 11)
-  rect(x2,y2,x2+w2,y2+h2, mode==2 and 7 or 8)
+  rrect(x1,y1,w1,h1,0, mode==1 and 7 or 11)
+  rrect(x2,y2,w2,h2,0, mode==2 and 7 or 8)
   circ(goalx,goaly,2, mode==3 and 7 or 9)
 
   print(x1..","..y1..","..w1..","..h1,0,0,mode==1 and 7 or 11)
@@ -38,7 +38,7 @@ function _draw()
    end
    line(tx,ty,tx+nx*5,ty+ny*5,10)
    fillp(▒)
-   rect(tx,ty,tx+w1,ty+h1,12)
+   rrect(tx,ty,w1,h1,0,12)
    fillp()
    circ(tx+nx*5,ty+ny*5,1,10)
 
