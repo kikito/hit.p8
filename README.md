@@ -16,7 +16,14 @@ I present you hit. It's a single function which will solve this particular probl
 # Parameters and return values
 
 ```
+-- hit.lua (full)
 t,nx,ny,tx,ty,intersect = hit(x1,y1,w1,h1,x2,y2,w2,h2,goalx,goaly)
+
+-- hit-mid.lua
+t,nx,ny = hit(x1,y1,w1,h1,x2,y2,w2,h2,goalx,goaly)
+
+-- hit-min.lua
+t = hit(x1,y1,w1,h1,x2,y2,w2,h2,goalx,goaly)
 ```
 
 Hit takes 10 parameters:
@@ -32,16 +39,36 @@ Hit returns nil if the first rectangle can move freely to goalx,goaly without to
 
 # Usage
 
-Save the hit function to a single file (hit.lua) and then
+Save the desired variant to a file and then include it:
 ```
-#include hit.lua
+#include hit.lua      -- full version
+#include hit-mid.lua  -- t + normals only
+#include hit-min.lua  -- t only
 ```
+
+# Variants
+
+Hit comes in three variants depending on how much information you need:
+
+| File | Signature | Use when |
+|---|---|---|
+| `hit-min.lua` | `t = hit(...)` | You only need to know *when* a collision occurs (e.g. sorting or binary yes/no) |
+| `hit-mid.lua` | `t,nx,ny = hit(...)` | You need the collision time and the face normal for collision response |
+| `hit.lua` | `t,nx,ny,tx,ty,intersect = hit(...)` | You need full information: touch position, and whether boxes were already overlapping |
+
+All three use the same function name `hit` and the same 10 parameters, so you can swap them by changing which file you `#include`.
+
+`hit-min` and `hit-mid` both return `0` for any overlap (no normals / zero normals respectively). `hit` handles all degenerate cases including the minimum displacement vector for overlapping+no-movement.
 
 # Cost
 
-Hit costs 422 tokens approximately. Most of the tokens come from the calculation of tx,ty,nx and ny. If those are not needed, then it can be strip down to a much leaner function that only returns true or false.
+Hit costs 422 tokens approximately. Most of the tokens come from the calculation of tx,ty,nx and ny.
 
-The function has several comments which can be stripped in order to save characters if necessary.
+`hit-mid` costs approximately 280 tokens — it adds normals over `hit-min` but skips touch coordinates and the intersect flag.
+
+`hit-min` costs approximately 160 tokens — it only returns `t`.
+
+All variants have their comments which can be stripped in order to save characters if necessary.
 
 Performance-wise, it is not very expensive. There will be always some calls to abs, and number comparisons. For non-degenerate cases there will always be 4 divisions per collision detection.
 
@@ -83,4 +110,15 @@ Bump.lua is also much bigger, and includes a whole spacial hash implementation a
 ## Have you used this on an actual videogame?
 
 I am building one, this is but one of the pieces. 
+
+# Changelog
+
+## 1.1.0
+
+- Added `hit-min.lua`: minimal variant returning only `t`
+- Added `hit-mid.lua`: intermediate variant returning `t, nx, ny`
+
+## 1.0.0
+
+- Initial release of `hit.lua`
 
